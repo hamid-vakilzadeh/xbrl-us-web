@@ -67,13 +67,6 @@ def show_login():
         help="Your client secret for the [XBRL.US](https://www.xbrl.us) API.",
     )
 
-    # checkbox for remember me
-    remember_me = st.checkbox(
-        label="Remember me",
-        value=False,
-        key="remember_me",
-    )
-
     disable_login_btn = False
     if username == "" or password == "" or client_id == "" or client_secret == "":
         disable_login_btn = True
@@ -87,7 +80,7 @@ def show_login():
 
     if verify_api:
         # try the credentials before creating xbrl object
-        try_credentials(user_name=username, pass_word=password, client_id=client_id, client_secret=client_secret, store=remember_me)
+        try_credentials(user_name=username, pass_word=password, client_id=client_id, client_secret=client_secret)
         st.rerun()
 
 
