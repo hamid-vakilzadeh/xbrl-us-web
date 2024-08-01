@@ -2,6 +2,8 @@ from pathlib import Path
 
 import streamlit as st
 
+from unittest.mock import patch
+
 from xbrl_us import XBRL
 
 user_info_path = Path.home() / ".xbrl-us"
@@ -10,7 +12,7 @@ user_info_path = Path.home() / ".xbrl-us"
 def try_credentials(user_name: str, pass_word: str, client_id: str, client_secret: str, store: bool = False):
     try:
         with st.spinner(text="Validating credentials..."):
-            XBRL(username=user_name, password=pass_word, client_id=client_id, client_secret=client_secret)._get_token(store="y")
+            XBRL(username=user_name, password=pass_word, client_id=client_id, client_secret=client_secret)._get_token(store="n")
             st.session_state.username = user_name
             st.session_state.password = pass_word
             st.session_state.client_id = client_id
@@ -422,9 +424,10 @@ if __name__ == "__main__":
             try:
                 with st.spinner("Running query..."):
                     st.session_state.pop("last_query", None)
-                    st.session_state.last_query = xbrl.query(
-                        **st.session_state.query_params, as_dataframe=True, print_query=True, streamlit=True, timeout=10
-                    )
+                    with patch('builtins.input', return_value='n'):
+                        st.session_state.last_query = xbrl.query(
+                            **st.session_state.query_params, as_dataframe=True, print_query=True, streamlit=True, timeout=10
+                        )
                     if "account_limit" not in st.session_state:
                         st.session_state.account_limit = xbrl.account_limit
 
