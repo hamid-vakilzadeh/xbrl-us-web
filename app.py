@@ -9,7 +9,7 @@ from xbrl_us import XBRL
 user_info_path = Path.home() / ".xbrl-us"
 
 
-def try_credentials(user_name: str, pass_word: str, client_id: str, client_secret: str, store: bool = False):
+def try_credentials(user_name: str, pass_word: str, client_id: str, client_secret: str):
     try:
         with st.spinner(text="Validating credentials..."):
             XBRL(username=user_name, password=pass_word, client_id=client_id, client_secret=client_secret)._get_token(store="n")
@@ -66,11 +66,11 @@ def show_login():
     )
 
     # checkbox for remember me
-    remember_me = st.checkbox(
-        label="Remember me",
-        value=False,
-        key="remember_me",
-    )
+    # remember_me = st.checkbox(
+    #     label="Remember me",
+    #     value=False,
+    #     key="remember_me"
+    # )
 
     disable_login_btn = False
     if username == "" or password == "" or client_id == "" or client_secret == "":
@@ -85,7 +85,7 @@ def show_login():
 
     if verify_api:
         # try the credentials before creating xbrl object
-        try_credentials(user_name=username, pass_word=password, client_id=client_id, client_secret=client_secret, store=False)
+        try_credentials(user_name=username, pass_word=password, client_id=client_id, client_secret=client_secret)
         st.rerun()
 
 
@@ -173,10 +173,10 @@ def range_and_slider_for_array_integers(key, values):
         )
 
 
-def text_box_for_array_strings_no_ops(key, palceholder):
+def text_box_for_array_strings_no_ops(key, placeholder):
     st.text_area(
         label=f"**{key}**",
-        placeholder=f"{palceholder}",
+        placeholder=f"{placeholder}",
         key=f"{key}",
     )
 
