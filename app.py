@@ -9,12 +9,8 @@ user_info_path = Path.home() / ".xbrl-us"
 
 def try_credentials(user_name: str, pass_word: str, client_id: str, client_secret: str, store: bool = False):
     try:
-        if store:
-            store = "y"
-        else:
-            store = "n"
         with st.spinner(text="Validating credentials..."):
-            XBRL(username=user_name, password=pass_word, client_id=client_id, client_secret=client_secret)._get_token(store=store)
+            XBRL(username=user_name, password=pass_word, client_id=client_id, client_secret=client_secret)._get_token(store="y")
             st.session_state.username = user_name
             st.session_state.password = pass_word
             st.session_state.client_id = client_id
@@ -65,6 +61,13 @@ def show_login():
         "Client Secret",
         type="password",
         help="Your client secret for the [XBRL.US](https://www.xbrl.us) API.",
+    )
+
+    # checkbox for remember me
+    remember_me = st.checkbox(
+        label="Remember me",
+        value=False,
+        key="remember_me",
     )
 
     disable_login_btn = False
