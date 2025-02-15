@@ -12,12 +12,13 @@ user_info_path = Path.home() / ".xbrl-us"
 def try_credentials(user_name: str, pass_word: str, client_id: str, client_secret: str):
     try:
         with st.spinner(text="Validating credentials..."):
-            XBRL(username=user_name, password=pass_word, client_id=client_id, client_secret=client_secret)._get_token(store="n")
+            XBRL(username=user_name, password=pass_word, client_id=client_id, client_secret=client_secret)
             st.session_state.username = user_name
             st.session_state.password = pass_word
             st.session_state.client_id = client_id
             st.session_state.client_secret = client_secret
             st.session_state.returning_user = True
+            st.rerun()
     except Exception as e:
         st.error(f"Invalid credentials. Please try again. {e}")
         st.stop()
