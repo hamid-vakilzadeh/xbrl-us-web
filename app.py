@@ -18,7 +18,7 @@ def try_credentials(user_name: str, pass_word: str, client_id: str, client_secre
             st.session_state.client_id = client_id
             st.session_state.client_secret = client_secret
             st.session_state.returning_user = True
-            st.rerun()
+        st.rerun()
     except Exception as e:
         st.error(f"Invalid credentials. Please try again. {e}")
         st.stop()
