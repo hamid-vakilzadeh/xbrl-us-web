@@ -87,7 +87,6 @@ def show_login():
     if verify_api:
         # try the credentials before creating xbrl object
         try_credentials(user_name=username, pass_word=password, client_id=client_id, client_secret=client_secret)
-        st.rerun()
 
 
 def input_number_for_integers(key):
