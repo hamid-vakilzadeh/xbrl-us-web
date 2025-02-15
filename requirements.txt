@@ -1,1 +1,1 @@
-xbrl-us
+xbrl-us>=0.0.44
