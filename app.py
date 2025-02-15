@@ -6,8 +6,6 @@ from unittest.mock import patch
 
 from xbrl_us import XBRL
 
-user_info_path = Path.home() / ".xbrl-us"
-
 
 def try_credentials(user_name: str, pass_word: str, client_id: str, client_secret: str):
     try:
@@ -65,13 +63,6 @@ def show_login():
         type="password",
         help="Your client secret for the [XBRL.US](https://www.xbrl.us) API.",
     )
-
-    # checkbox for remember me
-    # remember_me = st.checkbox(
-    #     label="Remember me",
-    #     value=False,
-    #     key="remember_me"
-    # )
 
     disable_login_btn = False
     if username == "" or password == "" or client_id == "" or client_secret == "":
@@ -197,16 +188,6 @@ if __name__ == "__main__":
     st.title("Explore XBRL.us Data")
 
     sidebar = st.sidebar
-    if user_info_path.exists():
-        if "returning_user" not in st.session_state:
-            st.session_state.returning_user = True
-            temp_xbrl = XBRL()
-            # show button to continue with the username
-            st.session_state.username = temp_xbrl.username
-            st.session_state.password = temp_xbrl.password
-            st.session_state.client_id = temp_xbrl.client_id
-            st.session_state.client_secret = temp_xbrl.client_secret
-
     if "returning_user" not in st.session_state or not st.session_state.returning_user:
         st.error("Please enter your credentials to begin.")
 
