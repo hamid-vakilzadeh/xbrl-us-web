@@ -1,1 +1,3 @@
 xbrl-us>=0.0.44
+streamlit
+pandas
