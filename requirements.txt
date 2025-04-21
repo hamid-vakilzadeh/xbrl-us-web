@@ -1,1 +1,2 @@
-xbrl-us<=0.1.0
+xbrl-us==1.0.1
+PyYAML>=5.3 , < 7
