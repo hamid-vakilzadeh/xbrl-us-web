@@ -16,7 +16,7 @@ TYPE_MAPPINGS = {
 }
 
 
-def try_credentials(user_name: str, pass_word: str, client_id: str, client_secret: str, store: bool = False):
+def try_credentials(user_name: str, pass_word: str, client_id: str, client_secret: str, store: bool = 'n'):
     try:
         with st.spinner(text="Validating credentials..."):
             st.session_state.xbrl = XBRL(
@@ -84,7 +84,7 @@ def show_login():
 
     if verify_api:
         # try the credentials before creating xbrl object
-        try_credentials(user_name=username, pass_word=password, client_id=client_id, client_secret=client_secret, store=False)
+        try_credentials(user_name=username, pass_word=password, client_id=client_id, client_secret=client_secret, store='n')
         st.rerun()
 
 
