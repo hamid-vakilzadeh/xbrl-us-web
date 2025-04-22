@@ -308,7 +308,7 @@ if __name__ == "__main__":
                     st.markdown(param[1]["definition"])
                     type = param[1]["type"]
 
-                    if type == "boolean":
+                    if type == "true/false":
                         st.radio(
                             label=f"Input **{param[0]}**:",
                             options=("true", "false"),
