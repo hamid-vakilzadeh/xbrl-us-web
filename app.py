@@ -324,7 +324,6 @@ if __name__ == "__main__":
                             key=f"{param[0]}",
                             label_visibility="collapsed",
                         )
-                    st.divider()
 
                 if len(st.session_state.parameters) > 0:
                     st.session_state.query_params["parameters"] = {}
